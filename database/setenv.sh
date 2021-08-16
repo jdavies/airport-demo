@@ -1,0 +1,3 @@
+export client_id="puyMuUngFjsgRjvqRGcXEkdQ"
+export client_secret="ZyzfiklbGJmRdZR4nytkfjmfxeq5mMKBPYXyck-3n4v4S3zNjbHjHBFdT0WiYvCZ2H9_Ez6I2sI21Q3_E9I4AmNgHqBMmpewUJnMFWKfgwScjIhebNdyuEjSf1i.12WC"
+export token="AstraCS:puyMuUngFjsgRjvqRGcXEkdQ:334dee1ff6e9125b1106adeeebbb3dd5f9d63cbbea53d7c10164904e647909a1"
