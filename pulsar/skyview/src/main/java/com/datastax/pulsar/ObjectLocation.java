@@ -1,21 +1,23 @@
 package com.datastax.pulsar;
 
-import  java.util.UUID;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Date;
+
+import org.apache.pulsar.client.api.schema.GenericRecord;
+
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class ObjectLocation implements Serializable {
 
-    // The objects UUID
-    private UUID id;
+    // The name of the object. For example: UA30405 (not a flight number, but an aircraft ID), or BagCart2687
+    // This is the unique ID for the piece of equipment.
+    private String name;
 
     //This need to be restricted to a list of values: ["misc", "aircraft", "fuel_truck", "bag_cart", "tractor"]
     private String type;
-
-    // The name of the object. For example: UA30405 (not a flight number, but an aircraft ID), or BagCart2687
-    private String name;
 
     // The x coordinate of the object
     private double x;
@@ -23,13 +25,7 @@ public class ObjectLocation implements Serializable {
     // The y coordinate of the object
     private double y;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    private long timeStamp;
 
     public String getType() {
         return type;
@@ -63,35 +59,54 @@ public class ObjectLocation implements Serializable {
         this.y = y;
     }
 
-    public ObjectLocation(UUID id, String type, String name, double x, double y) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.x = x;
-        this.y = y;
+    public long getTimestamp() {
+        return this.timeStamp;
     }
 
-    public byte[] getBytes() {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream out = null;
-        byte[] yourBytes = null;
-        try {
-            out = new ObjectOutputStream(bos);   
-            out.writeObject(this);
-            out.flush();
-            yourBytes = bos.toByteArray();
-        } catch(IOException ex) {
-            // Do nothing with this exception/
-            ex.printStackTrace();
-        } finally {
-            try {
-                bos.close();
-            } catch (IOException ex) {
-                // ignore close exception
-                ex.printStackTrace();
-            }
-        }
-        return yourBytes;
+    public void setTimstamp(long newTS) {
+        this.timeStamp = newTS;
+    }
+
+    public ObjectLocation(String name, String type, double x, double y, long timestamp) {
+        this.name = name;
+        this.type = type;
+        this.x = x;
+        this.y = y;
+        this.timeStamp = timestamp;
+    }
+
+    /**
+     * Construct an ObjectLocation record from the GenericRecord
+     * from Pulsar
+     * @param gRec
+     */
+    public ObjectLocation(GenericRecord gRec) {
+        this.name = (String)gRec.getField("name");
+        this.type = (String)gRec.getField("type");
+        this.x = (double)gRec.getField("x");
+        this.y = (double)gRec.getField("y");
+        this.timeStamp = (long)gRec.getField("timestamp");
+    }
+    
+    // public byte[] getBytes() {
+    //     //ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    //     // ObjectOutputStream out = null;
+    //     byte[] yourBytes = null;
+    //     try (ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
+    //         ObjectOutputStream out = new ObjectOutputStream(bos);) {
+    //         out.writeObject(this);
+    //         out.flush();
+    //         yourBytes = bos.toByteArray();
+    //     } catch(IOException ex) {
+    //         // Do nothing with this exception/
+    //         ex.printStackTrace();
+    //     }
+    //     return yourBytes;
+    // }
+
+    public String toString() {
+
+        return("Object: " + this.name + " - " + this.type +" is located at " + x + ", " + y + " at " + ts.to);
     }
 
 }
