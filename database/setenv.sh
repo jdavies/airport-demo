@@ -1,3 +1,0 @@
-export client_id="sRdXKRFydRkxlCjJxyMwlUbQ"
-export client_secret="Sz-S6J_v5aSaEPZJI6MP.yaBI93ay3oaPtZP7w97gMsI5slsOWDUQQ.NMQmn9fKiAh3N6w42ZhbjO,MRv.czZh9Goj7fkxM3GNxJ221WeAJwbMRM_-NN5X+h-xIc-RBL"
-export token="AstraCS:sRdXKRFydRkxlCjJxyMwlUbQ:04e5168b1f84b6ac35156a63cdf4895ec559159d55a8e68c91679a559119960c"
