@@ -1,6 +1,7 @@
 package com.datastax.pulsar;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,7 +20,8 @@ public class App extends TimerTask {
     private static final String  STREAM_NAME = "airport-events2";
     private static final String NAMESPACE = "default";
     private static final String TOPIC = "object-location";
-    private ObjectLocation objLoc = new ObjectLocation("F372", "fuel_truck", 0.0, 0.0);
+    Date now = new Date();
+    private ObjectLocation objLoc = new ObjectLocation("F372", "fuel_truck", 0.0, 0.0, now.getTime());
     private PulsarClient client = null;
     private Producer<ObjectLocation> producer = null;
 

@@ -3,7 +3,11 @@ package com.datastax.pulsar;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.swing.JSpinner.DateEditor;
 
 import org.apache.pulsar.client.api.schema.GenericRecord;
 
@@ -16,7 +20,7 @@ public class ObjectLocation implements Serializable {
     // This is the unique ID for the piece of equipment.
     private String name;
 
-    //This need to be restricted to a list of values: ["misc", "aircraft", "fuel_truck", "bag_cart", "tractor"]
+    // This need to be restricted to a list of values: ["misc", "aircraft", "fuel_truck", "bag_cart", "tractor"]
     private String type;
 
     // The x coordinate of the object
@@ -87,26 +91,11 @@ public class ObjectLocation implements Serializable {
         this.y = (double)gRec.getField("y");
         this.timeStamp = (long)gRec.getField("timestamp");
     }
-    
-    // public byte[] getBytes() {
-    //     //ByteArrayOutputStream bos = new ByteArrayOutputStream();
-    //     // ObjectOutputStream out = null;
-    //     byte[] yourBytes = null;
-    //     try (ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
-    //         ObjectOutputStream out = new ObjectOutputStream(bos);) {
-    //         out.writeObject(this);
-    //         out.flush();
-    //         yourBytes = bos.toByteArray();
-    //     } catch(IOException ex) {
-    //         // Do nothing with this exception/
-    //         ex.printStackTrace();
-    //     }
-    //     return yourBytes;
-    // }
 
     public String toString() {
-
-        return("Object: " + this.name + " - " + this.type +" is located at " + x + ", " + y + " at " + ts.to);
+        Date date = new Date(timeStamp);
+        DateFormat df = new SimpleDateFormat("");
+        return("Object: " + this.name + " - " + this.type +" is located at " + x + ", " + y + " at " + df.format(date));
     }
 
 }
