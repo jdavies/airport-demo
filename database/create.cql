@@ -21,7 +21,7 @@ create table object_location_history (
     type text,
     x decimal,
     y decimal,
-    ts TIMESTAMP,
+    ts bigint,
     PRIMARY KEY((name), ts)
-) WITH CLUSTERING ORDER BY (ts desc); ;
+) WITH CLUSTERING ORDER BY (ts desc);
 
