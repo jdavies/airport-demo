@@ -5,6 +5,9 @@ database/*.csv
 database/setenv.sh
 credentials.dart
 
+# Don't commit the java class files
+*.class
+
 # Files and directories created by pub
 .dart_tool/
 .packages
