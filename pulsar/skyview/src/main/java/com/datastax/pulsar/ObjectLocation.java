@@ -1,18 +1,11 @@
 package com.datastax.pulsar;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.JSpinner.DateEditor;
-
 import org.apache.pulsar.client.api.schema.GenericRecord;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
 
 public class ObjectLocation implements Serializable {
 
@@ -29,7 +22,7 @@ public class ObjectLocation implements Serializable {
     // The y coordinate of the object
     private double y;
 
-    private long timeStamp;
+    private long ts;
 
     public String getType() {
         return type;
@@ -63,12 +56,12 @@ public class ObjectLocation implements Serializable {
         this.y = y;
     }
 
-    public long getTimestamp() {
-        return this.timeStamp;
+    public long getTs() {
+        return this.ts;
     }
 
-    public void setTimstamp(long newTS) {
-        this.timeStamp = newTS;
+    public void setTs(long newTS) {
+        this.ts = newTS;
     }
 
     public ObjectLocation(String name, String type, double x, double y, long timestamp) {
@@ -76,7 +69,7 @@ public class ObjectLocation implements Serializable {
         this.type = type;
         this.x = x;
         this.y = y;
-        this.timeStamp = timestamp;
+        this.ts = timestamp;
     }
 
     /**
@@ -89,13 +82,12 @@ public class ObjectLocation implements Serializable {
         this.type = (String)gRec.getField("type");
         this.x = (double)gRec.getField("x");
         this.y = (double)gRec.getField("y");
-        this.timeStamp = (long)gRec.getField("timestamp");
+        this.ts = (long)gRec.getField("ts");
     }
 
     public String toString() {
-        Date date = new Date(timeStamp);
-        DateFormat df = new SimpleDateFormat("");
+        Date date = new Date(ts);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
         return("Object: " + this.name + " - " + this.type +" is located at " + x + ", " + y + " at " + df.format(date));
     }
-
 }
