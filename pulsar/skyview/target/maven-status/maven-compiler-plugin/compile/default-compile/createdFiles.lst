@@ -1,2 +1,4 @@
+com/datastax/pulsar/Credentials.class
 com/datastax/pulsar/ObjectLocation.class
 com/datastax/pulsar/App.class
+com/datastax/pulsar/Flight.class

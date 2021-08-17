@@ -1,0 +1,6 @@
+package com.datastax.pulsar;
+
+public class Credentials {
+    // This is the pulsar token
+    public static String token="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbGllbnQ7ZDkwOWFiMGItODRlNy00MGI0LWFjZGMtNDdjNmY5MmRiMjk5O1lXbHljRzl5ZEMxbGRtVnVkSE09In0.W597zdJaUfwjSiDxpR-Gz3BlPlA_noPhZzKz0iCIM61E5vwCbaDVqTR8F_nw5VMyuMnhssCYmpxL_VqqNqeJzn3Tg9HkS2EGPHe_6XJHAuj-DlP_S_6MnioceCIPEFY2fDQrPkf6JFvf1voX19hDY-mcn7dpBy5PJh9GO9B7dPfFkGL-kmCfCZkvE4h9SSPc-hkj5MD0ezkVXwpVspFDmZhwmF4HimkQZ8zsPp9eQD1NUJTyWcI8Cn5S5aKM6OtoqtCeUOEr4rngG4XLVkHxeZejCUOSocVyAuc0yLDThgfn2-dPr6SwzZf6r1gP24g0-H-v-wM82NnhatGm66kCdw";
+}

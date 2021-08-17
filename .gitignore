@@ -28,5 +28,4 @@ doc/api/
 *.js.deps
 *.js.map
 database/GeneratedToken-Airport-Demo.csv
-pulsar/skyview/src/main/java/com/datastax/pulsar/Credentials.java
-pulsar/skyview/target/classes/com/datastax/pulsar/Credentials.class
+
