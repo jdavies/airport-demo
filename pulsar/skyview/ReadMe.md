@@ -1,6 +1,6 @@
 # ReadMe.md
 
-To compile the project, open the terminal to the ```pulsar/skyview/``` folder. Execure the following command:
+To compile the project, open the terminal to the ```pulsar/skyview/``` folder. Execute the following command:
 
 ```sh
 mvn clean package assembly:single
