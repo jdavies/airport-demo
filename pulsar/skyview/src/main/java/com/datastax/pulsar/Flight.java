@@ -2,13 +2,11 @@ package com.datastax.pulsar;
 
 import java.util.Date;
 import java.util.TimerTask;
-
 import org.apache.pulsar.client.api.AuthenticationFactory;
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.PulsarClientException;
 import org.apache.pulsar.client.impl.schema.JSONSchema;
-
 
 public class Flight extends TimerTask {
     private static final String BROKER_SERVICE_URL = "pulsar+ssl://pulsar-aws-useast2.streaming.datastax.com:6651";
