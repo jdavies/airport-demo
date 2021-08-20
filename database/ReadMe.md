@@ -4,6 +4,6 @@ The ```create.cql``` file is the workhorse here. Use it to create you tables. Yo
 
 ```sh
 export client_id="<your client/database ID>"
-export client_secret="<our client secret>"
+export client_secret="<your client secret>"
 export token="<your database token>"
 ```
