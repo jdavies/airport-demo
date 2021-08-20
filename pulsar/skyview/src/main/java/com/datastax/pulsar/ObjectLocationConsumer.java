@@ -48,7 +48,7 @@ public class ObjectLocationConsumer extends TimerTask {
             // Block for up to 1 second for a message
             Message<GenericRecord> msg  = consumer.receive(1, TimeUnit.SECONDS);
 
-            if(msg != null) {
+            while(msg != null) {
                 System.out.println("Message received!");
                 GenericRecord gRec = msg.getValue();
                 ObjectLocation recObj = new ObjectLocation(gRec);
@@ -57,6 +57,9 @@ public class ObjectLocationConsumer extends TimerTask {
                 // Acknowledge the message to remove it from the message backlog
                 System.out.println("Acknowledging message...");
                 consumer.acknowledge(msg);
+
+                // Block for up to 1 second for a message
+                msg  = consumer.receive(1, TimeUnit.SECONDS);
             }
         } catch(PulsarClientException pcex) {
             pcex.printStackTrace();
@@ -66,8 +69,9 @@ public class ObjectLocationConsumer extends TimerTask {
     public static void main(String[] args) {
         ObjectLocationConsumer objConsumer = new ObjectLocationConsumer();
 
-        Timer timer = new Timer();
+        objConsumer.run();
+        // Timer timer = new Timer();
         // Update the position every second
-        timer.schedule(objConsumer, 0, 1000);
+        // timer.schedule(objConsumer, 0, 1000);
     }
 }

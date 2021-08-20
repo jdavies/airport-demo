@@ -12,7 +12,7 @@ The from that same directory, run the producr project with this command:
 java -cp target/skyview-1.0-SNAPSHOT-jar-with-dependencies.jar com.datastax.pulsar.App
 ```
 
-Run themessage consumer project with this command:
+Run the message consumer project with this command:
 
 ```sh
 java -cp target/skyview-1.0-SNAPSHOT-jar-with-dependencies.jar com.datastax.pulsar.ObjectLocationConsumer
