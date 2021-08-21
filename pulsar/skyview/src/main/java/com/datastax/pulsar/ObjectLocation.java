@@ -11,10 +11,10 @@ public class ObjectLocation implements Serializable {
 
     // The name of the object. For example: UA30405 (not a flight number, but an aircraft ID), or BagCart2687
     // This is the unique ID for the piece of equipment.
-    private String name;
+    private String equipmentID;
 
     // This need to be restricted to a list of values: ["misc", "aircraft", "fuel_truck", "bag_cart", "tractor"]
-    private String type;
+    private String equipmentType;
 
     // The x coordinate of the object
     private double x;
@@ -22,22 +22,23 @@ public class ObjectLocation implements Serializable {
     // The y coordinate of the object
     private double y;
 
-    private long ts;
+    // The current rotation of the object, measured i degrees, where 0 degrees is stright up.
+    private double rotation;
 
-    public String getType() {
-        return type;
+    public String getEquiipmentType() {
+        return equipmentType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setEquipmentType(String equipmentType) {
+        this.equipmentType = equipmentType;
     }
 
-    public String getName() {
-        return name;
+    public String getEquipmentID() {
+        return equipmentID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEquipmentID(String equipmentID) {
+        this.equipmentID = equipmentID;
     }
 
     public double getX() {
@@ -56,20 +57,20 @@ public class ObjectLocation implements Serializable {
         this.y = y;
     }
 
-    public long getTs() {
-        return this.ts;
+    public double getRotation() {
+        return rotation;
     }
 
-    public void setTs(long newTS) {
-        this.ts = newTS;
+    public void setRotation(double degrees) {
+        this.rotation = degrees;
     }
 
-    public ObjectLocation(String name, String type, double x, double y, long timestamp) {
-        this.name = name;
-        this.type = type;
+    public ObjectLocation(String equipmentID, String equipmentType, double x, double y, double degrees) {
+        this.equipmentID = equipmentID;
+        this.equipmentType = equipmentType;
         this.x = x;
         this.y = y;
-        this.ts = timestamp;
+        this.rotation = degrees;
     }
 
     /**
@@ -78,16 +79,13 @@ public class ObjectLocation implements Serializable {
      * @param gRec
      */
     public ObjectLocation(GenericRecord gRec) {
-        this.name = (String)gRec.getField("name");
-        this.type = (String)gRec.getField("type");
+        this.equipmentID = (String)gRec.getField("equipmentID");
+        this.equipmentType = (String)gRec.getField("equipmentType");
         this.x = (double)gRec.getField("x");
         this.y = (double)gRec.getField("y");
-        this.ts = (long)gRec.getField("ts");
     }
 
     public String toString() {
-        Date date = new Date(ts);
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
-        return("Object: " + this.name + " - " + this.type +" is located at " + x + ", " + y + " at " + df.format(date));
+        return("Object: " + this.equipmentID + " - " + this.equipmentType +" is located at " + x + ", " + y + ", rotated " + rotation + "\u00B0.");
     }
 }
