@@ -12,19 +12,19 @@ create table object_location (
     x decimal,
     y decimal,
     rotation decimal,
-    PRIMARY KEY(name)
+    PRIMARY KEY(equipment_id)
 );
 
 -- This table tracks the history of the objects location
 drop table if exists object_location_history;
 create table object_location_history (
-    equipmentID text,
-    equipmentType text,
+    equipment_id text,
+    equipment_type text,
     x decimal,
     y decimal,
     rotation decimal,
     ts bigint,
-    PRIMARY KEY((name), ts)
+    PRIMARY KEY((equipment_id), ts)
 ) WITH CLUSTERING ORDER BY (ts desc);
 
 CREATE CUSTOM INDEX IF NOT EXISTS  x_loc
