@@ -7,21 +7,32 @@ use airport;
 -- Type may be any one of the following: ["misc", "bag_cart", "tractor", "fuel_truck", "aircraft", etc]
 drop table if exists object_location;
 create table object_location (
-    name text,
-    type text,
+    equipment_id text,
+    equipment_type text,
     x decimal,
     y decimal,
+    rotation decimal,
     PRIMARY KEY(name)
 );
 
 -- This table tracks the history of the objects location
 drop table if exists object_location_history;
 create table object_location_history (
-    name text,
-    type text,
+    equipmentID text,
+    equipmentType text,
     x decimal,
     y decimal,
+    rotation decimal,
     ts bigint,
     PRIMARY KEY((name), ts)
 ) WITH CLUSTERING ORDER BY (ts desc);
 
+CREATE CUSTOM INDEX IF NOT EXISTS  x_loc
+  ON object_location_history (x) USING 'StorageAttachedIndex';
+
+CREATE CUSTOM INDEX IF NOT EXISTS  y_loc
+  ON object_location_history (y) USING 'StorageAttachedIndex';
+
+-- Sample queries
+select * from object_location_history where x > -15;
+select * from object_location_history where x > -15 AND x < -10 AND y = 0;
