@@ -1,6 +1,5 @@
 package com.datastax.pulsar;
 
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +29,7 @@ public class ObjectLocationTimestamp extends ObjectLocation {
      * @param gRec
      */
     public ObjectLocationTimestamp(GenericRecord gRec) {
-        super((String)gRec.getField("name"), (String)gRec.getField("type"), (double)gRec.getField("x"), (double)gRec.getField("y"), (double)gRec.getField("rotation"));
+        super((String)gRec.getField("equipment_id"), (String)gRec.getField("equipment_type"), (double)gRec.getField("x"), (double)gRec.getField("y"), (double)gRec.getField("rotation"));
         this.ts = (long)gRec.getField("ts");
     }
 
@@ -38,6 +37,6 @@ public class ObjectLocationTimestamp extends ObjectLocation {
     public String toString() {
         Date date = new Date(ts);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
-        return("Object: " + getName() + " - " + getType() +" is located at " + getX() + ", " + getY() + ", rotated " + getRotation() + "\u00B0 at " + df.format(date));
+        return("Object: " + getEquipmentID() + " - " + getEquipmentType() +" is located at " + getX() + ", " + getY() + ", rotated " + getRotation() + "\u00B0 at " + df.format(date));
     }
 }

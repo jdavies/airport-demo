@@ -25,7 +25,7 @@ public class ObjectLocation implements Serializable {
     // The current rotation of the object, measured i degrees, where 0 degrees is stright up.
     private double rotation;
 
-    public String getEquiipmentType() {
+    public String getEquipmentType() {
         return equipmentType;
     }
 
