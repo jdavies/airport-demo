@@ -30,3 +30,4 @@ doc/api/
 
 # Don't commit the .DS_Store folders
 .DS_Store/
+airport_demo_tokens.csv
