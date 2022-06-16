@@ -32,3 +32,6 @@ doc/api/
 **/.DS_Store
 airport_demo_tokens.csv
 pulsar/skyview/src/main/java/com/datastax/pulsar/Credentials.java
+pulsar/.DS_Store
+pulsar/skyview/.DS_Store
+pulsar/skyview/src/.DS_Store
