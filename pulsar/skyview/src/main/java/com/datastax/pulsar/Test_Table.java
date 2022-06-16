@@ -11,7 +11,7 @@ public class Test_Table implements Serializable {
 
     // The name of the object. For example: UA30405 (not a flight number, but an aircraft ID), or BagCart2687
     // This is the unique ID for the piece of equipment.
-    private String equipment_id;
+    public String equipment_id;
 
     public String getEquipmentID() {
         return equipment_id;

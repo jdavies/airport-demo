@@ -24,7 +24,6 @@ public class Test extends TimerTask {
         // Send a message to the topic
         try {
             if(test_table != null && producer!=null) {
-                System.out.println("got it!");
                 producer.send(test_table);
                 System.out.println(test_table.toString());
             }

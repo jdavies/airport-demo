@@ -8,7 +8,7 @@ import org.apache.pulsar.client.api.PulsarClientException;
 
 public class Flight extends TimerTask {
 
-    private ObjectLocation currentLocation = null;  // Where is this aircraft located at currently?
+    public ObjectLocation currentLocation = null;  // Where is this aircraft located at currently?
     private boolean isPaused = false;   // Is he animation paused or not
     private ArrayList<ObjectLocation> pathArray = new ArrayList<ObjectLocation>();
     private int animationFrame = 0; // This is an index into the pathArray.
@@ -57,7 +57,7 @@ public class Flight extends TimerTask {
                     ObjectLocation objLoc = pathArray.get(animationFrame++);
                     currentLocation = objLoc;
                 }
-                currentLocation.setTs(now.getTime());
+                currentLocation.ts = now.getTime();
             }
             
         } catch(PulsarClientException pcex) {

@@ -11,70 +11,22 @@ public class ObjectLocation implements Serializable {
 
     // The name of the object. For example: UA30405 (not a flight number, but an aircraft ID), or BagCart2687
     // This is the unique ID for the piece of equipment.
-    private String equipment_id;
+    public String equipment_id;
 
     // This need to be restricted to a list of values: ["misc", "aircraft", "fuel_truck", "bag_cart", "tractor"]
-    private String equipment_type;
+    public String equipment_type;
 
     // The x coordinate of the object
-    private double x;
+    public double x;
 
     // The y coordinate of the object
-    private double y;
+    public double y;
 
     // The current rotation of the object, measured i degrees, where 0 degrees is stright up.
-    private double rotation;
+    public double rotation;
 
     // This time when this object was in this location
-    private long ts;
-
-    public String getEquipmentType() {
-        return equipment_type;
-    }
-
-    public void setEquipmentType(String equipmentType) {
-        this.equipment_type = equipmentType;
-    }
-
-    public String getEquipmentID() {
-        return equipment_id;
-    }
-
-    public void setEquipmentID(String equipmentID) {
-        this.equipment_id = equipmentID;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public double getRotation() {
-        return rotation;
-    }
-
-    public void setRotation(double degrees) {
-        this.rotation = degrees;
-    }
-
-    public long getTs() {
-        return this.ts;
-    }
-
-    public void setTs(long newTS) {
-        this.ts = newTS;
-    }
+    public long ts;
 
     public ObjectLocation(String equipmentID, String equipmentType, double x, double y, double degrees, long timestamp) {
         this.equipment_id = equipmentID;
