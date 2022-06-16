@@ -9,9 +9,10 @@ drop table if exists object_location;
 create table object_location (
     equipment_id text,
     equipment_type text,
+    rotation decimal,
     x decimal,
     y decimal,
-    rotation decimal,
+    ts bigint,
     PRIMARY KEY(equipment_id)
 );
 
@@ -32,6 +33,15 @@ CREATE CUSTOM INDEX IF NOT EXISTS  x_loc
 
 CREATE CUSTOM INDEX IF NOT EXISTS  y_loc
   ON object_location_history (y) USING 'StorageAttachedIndex';
+
+-- Testing Only
+drop table if exists test_table;
+create table test_table (
+    equipment_id text,
+    PRIMARY KEY(equipment_id)
+);
+
+select * from test_table;
 
 -- Sample queries
 select * from object_location_history where x > -15;

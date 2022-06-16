@@ -1,5 +1,9 @@
+import 'dart:html';
+
 import 'package:client_app/util/APIManager.dart';
 import 'package:flutter/material.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/status.dart' as status;
 
 void main() {
   runApp(MyApp());
@@ -48,6 +52,31 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  final TextEditingController _controller = TextEditingController();
+  final token =
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbGllbnQ7ZDkwOWFiMGItODRlNy00MGI0LWFjZGMtNDdjNmY5MmRiMjk5O1lXbHljRzl5ZEMxbGRtVnVkSE09In0.W597zdJaUfwjSiDxpR-Gz3BlPlA_noPhZzKz0iCIM61E5vwCbaDVqTR8F_nw5VMyuMnhssCYmpxL_VqqNqeJzn3Tg9HkS2EGPHe_6XJHAuj-DlP_S_6MnioceCIPEFY2fDQrPkf6JFvf1voX19hDY-mcn7dpBy5PJh9GO9B7dPfFkGL-kmCfCZkvE4h9SSPc-hkj5MD0ezkVXwpVspFDmZhwmF4HimkQZ8zsPp9eQD1NUJTyWcI8Cn5S5aKM6OtoqtCeUOEr4rngG4XLVkHxeZejCUOSocVyAuc0yLDThgfn2-dPr6SwzZf6r1gP24g0-H-v-wM82NnhatGm66kCdw';
+  final String authHeader =
+      'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbGllbnQ7ZDkwOWFiMGItODRlNy00MGI0LWFjZGMtNDdjNmY5MmRiMjk5O1lXbHljRzl5ZEMxbGRtVnVkSE09In0.W597zdJaUfwjSiDxpR-Gz3BlPlA_noPhZzKz0iCIM61E5vwCbaDVqTR8F_nw5VMyuMnhssCYmpxL_VqqNqeJzn3Tg9HkS2EGPHe_6XJHAuj-DlP_S_6MnioceCIPEFY2fDQrPkf6JFvf1voX19hDY-mcn7dpBy5PJh9GO9B7dPfFkGL-kmCfCZkvE4h9SSPc-hkj5MD0ezkVXwpVspFDmZhwmF4HimkQZ8zsPp9eQD1NUJTyWcI8Cn5S5aKM6OtoqtCeUOEr4rngG4XLVkHxeZejCUOSocVyAuc0yLDThgfn2-dPr6SwzZf6r1gP24g0-H-v-wM82NnhatGm66kCdw';
+
+  final String TOPIC =
+      'wss://pulsar-aws-useast2.streaming.datastax.com:8001/ws/v2/consumer/persistent/airport-events/airport/object-location/my-subscription';
+
+  _MyHomePageState() {
+    Map<String, dynamic> headers = {"Authorization": authHeader};
+
+    var channel =
+        IOWebSocketChannel.connect(Uri.parse(TOPIC), headers: headers);
+
+    channel.stream.listen((message) {
+      channel.sink.add('received!');
+      channel.sink.close(status.goingAway);
+    });
+
+    // WebSocket ws = WebSocket(TOPIC, headers);
+    // ws.onMessage.listen((event) {
+    //   print(event.toString());
+    //   });
+  }
 
   void _incrementCounter() {
     setState(() {

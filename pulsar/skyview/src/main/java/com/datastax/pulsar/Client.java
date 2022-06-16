@@ -11,30 +11,32 @@ import org.apache.pulsar.client.api.PulsarClientException;
 import org.apache.pulsar.client.api.Schema;
 import org.apache.pulsar.client.api.schema.GenericRecord;
 
-public class ObjectLocationConsumer extends TimerTask {
-    private static final String BROKER_SERVICE_URL = "pulsar+ssl://pulsar-aws-useast2.streaming.datastax.com:6651";
-    private static final String  STREAM_NAME = "airport-events";
-    private static final String NAMESPACE = "airport";
-    private static final String TOPIC = "object-location";
-
+/**
+ * This is a client to the object-location pulsar topic
+ */
+public class Client extends TimerTask {
+    final String SERVICE_URL = "pulsar+ssl://pulsar-aws-useast2.streaming.datastax.com:6651";
+    final String TENANT_NAME = "airport-events";
+    final String NAMESPACE = "airport";
+    final String TOPIC = "object-location";
     private PulsarClient client = null;
     private Consumer<GenericRecord> consumer = null;
     
-    public ObjectLocationConsumer() {
+    public Client() {
         try {
             // Create client object
             client = PulsarClient.builder()
-            .serviceUrl(BROKER_SERVICE_URL)
-            .authentication(
-                AuthenticationFactory.token(Credentials.token)
-            )
-            .build();
+                .serviceUrl(SERVICE_URL)
+                .authentication(
+                    AuthenticationFactory.token(Credentials.token)
+                )
+                .build();
 
             // Create consumer on a topic with a subscription
             consumer = client.newConsumer(Schema.AUTO_CONSUME())
-            .topic("persistent://" + STREAM_NAME + "/" + NAMESPACE + "/" + TOPIC)
-            .subscriptionName("object-listener")
-            .subscribe();
+                .topic("persistent://" + TENANT_NAME + "/" + NAMESPACE + "/" + TOPIC)
+                .subscriptionName("object-listener")
+                .subscribe();
         } catch(Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -66,7 +68,7 @@ public class ObjectLocationConsumer extends TimerTask {
     }
 
     public static void main(String[] args) {
-        ObjectLocationConsumer objConsumer = new ObjectLocationConsumer();
+        Client objConsumer = new Client();
 
         objConsumer.run();
         // Timer timer = new Timer();
