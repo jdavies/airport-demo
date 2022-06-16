@@ -28,6 +28,8 @@ doc/api/
 *.js.deps
 *.js.map
 
+temp.txt
+
 # Don't commit the .DS_Store folders
 **/.DS_Store
 airport_demo_tokens.csv
